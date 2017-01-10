@@ -1,7 +1,5 @@
 class Read < ApplicationRecord
   scope :hot, -> {
-  select('reads.url as url')
-    .where('reads.created_at > ?', Time.now - 1.day)
-    .order(read_count: :desc).limit(10)
-  }
+    self.where(updated_at: (Time.now - 24.hours)..Time.now)
+        .order(read_count: :desc).limit(10)}
 end

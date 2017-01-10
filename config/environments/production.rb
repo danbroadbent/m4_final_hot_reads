@@ -3,6 +3,12 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.middleware.insert_before 0, Rack::Cors do
+        allow do
+          origins '*'
+          resource '*', :headers => :any, :methods => [:get, :post, :options]
+        end
+      end
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -33,6 +39,7 @@ Rails.application.configure do
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
